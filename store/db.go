@@ -68,7 +68,7 @@ func (db *DB) Delete(key []byte) error {
 		return db.db.Delete(key)
 	}
 }
-
+//batch write?？
 func (db *DB) NewWriteBatch() *WriteBatch {
 	db.st.BatchNum.Add(1)
 	wb := new(WriteBatch)
@@ -90,7 +90,7 @@ func (db *DB) NewSnapshot() (*Snapshot, error) {
 
 	return s, nil
 }
-
+//todo ??
 func (db *DB) Compact() error {
 	db.st.CompactNum.Add(1)
 
@@ -137,7 +137,7 @@ func (db *DB) needSyncCommit() bool {
 		n := time.Now()
 		need := false
 		db.m.Lock()
-
+		//more than 1s ,need sync
 		if n.Sub(db.lastCommit) > time.Second {
 			need = true
 		}
@@ -148,7 +148,7 @@ func (db *DB) needSyncCommit() bool {
 	}
 
 }
-
+//todo ??
 func (db *DB) GetSlice(key []byte) (Slice, error) {
 	if d, ok := db.db.(driver.ISliceGeter); ok {
 		t := time.Now()

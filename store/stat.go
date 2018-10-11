@@ -4,6 +4,7 @@ import (
 	"github.com/siddontang/go/sync2"
 )
 
+//stat num ,save in memory
 type Stat struct {
 	GetNum               sync2.AtomicInt64
 	GetMissingNum        sync2.AtomicInt64
@@ -25,6 +26,7 @@ type Stat struct {
 	CompactTotalTime     sync2.AtomicDuration
 }
 
+//maybe miss
 func (st *Stat) statGet(v interface{}, err error) {
 	st.GetNum.Add(1)
 	if v == nil && err == nil {
